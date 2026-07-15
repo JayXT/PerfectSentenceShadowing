@@ -14,7 +14,13 @@ Copy the file for your platform into the mpv scripts directory (`~/.config/mpv/s
 
 - `perfect-sentence-shadowing.lua` — GNU/Linux (PulseAudio/PipeWire)
 - `perfect-sentence-shadowing-macos.lua` — macOS (default input device; the
-  OS asks for microphone permission once)
+  OS asks for microphone permission once). It's also needed to allow mpv to register as an application needing access to microphone with commands like these:
+  ```
+  plutil -insert NSMicrophoneUsageDescription \
+  -string "Records your voice for pronunciation practice" \
+  /Applications/mpv.app/Contents/Info.plist
+  codesign --force --deep --sign - /Applications/mpv.app
+  ```
 - `perfect-sentence-shadowing-windows.lua` — Windows (first DirectShow
   capture device, detected automatically on the first recording; for a
   specific device, run `ffmpeg -list_devices true -f dshow -i dummy` and set
@@ -58,7 +64,13 @@ mpv та ffmpeg (доступні через PATH; версія для macOS т�
 
 - `perfect-sentence-shadowing.lua` — GNU/Linux (PulseAudio/PipeWire)
 - `perfect-sentence-shadowing-macos.lua` — macOS (пристрій введення за
-  замовчуванням; ОС одноразово запитає дозвіл на використання мікрофона)
+  замовчуванням; ОС одноразово запитає дозвіл на використання мікрофона). Може також бути потрібно дозволити mpv зареєструватись як програма, якій необхідний доступ до мікрофона командами як ці:
+  ```
+  plutil -insert NSMicrophoneUsageDescription \
+  -string "Records your voice for pronunciation practice" \
+  /Applications/mpv.app/Contents/Info.plist
+  codesign --force --deep --sign - /Applications/mpv.app
+  ```
 - `perfect-sentence-shadowing-windows.lua` — Windows (перший пристрій
   захоплення DirectShow, який визначається автоматично під час першого
   запису; щоб вибрати конкретний пристрій, виконайте
