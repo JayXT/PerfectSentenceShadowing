@@ -18,7 +18,7 @@ Copy the file for your platform into the mpv scripts directory (`~/.config/mpv/s
 - `perfect-sentence-shadowing-windows.lua` — Windows (first DirectShow
   capture device, detected automatically on the first recording; for a
   specific device, run `ffmpeg -list_devices true -f dshow -i dummy` and set
-  the `mic` line to `{"-f", "dshow", "-i", "audio=DEVICE NAME"}`)
+  the `local mic` line to `local mic = {"-f", "dshow", "-i", "audio=DEVICE NAME"}` for your microphone)
 
 For the most problem-free experience it's recommended to use GNU/Linux.
 
@@ -62,8 +62,8 @@ mpv та ffmpeg (доступні через PATH; версія для macOS т�
 - `perfect-sentence-shadowing-windows.lua` — Windows (перший пристрій
   захоплення DirectShow, який визначається автоматично під час першого
   запису; щоб вибрати конкретний пристрій, виконайте
-  `ffmpeg -list_devices true -f dshow -i dummy` і вкажіть у рядку `mic`
-  значення `{"-f", "dshow", "-i", "audio=НАЗВА ПРИСТРОЮ"}`)
+  `ffmpeg -list_devices true -f dshow -i dummy` і вкажіть у рядку `local mic`
+  значення `local mic = {"-f", "dshow", "-i", "audio=НАЗВА ПРИСТРОЮ"}` для вашого мікрофону)
 
 Для найбільш безпроблемного досвіду рекомендовано використовувати GNU/Linux.
 
