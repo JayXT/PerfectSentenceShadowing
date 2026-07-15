@@ -63,7 +63,7 @@ local function detect_mic(then_)
         function(_, res)
             local dev = parse_dshow(res and res.stderr or "")
             if not dev then return osd("No microphone found") end
-            mic = {"-f", "dshow", "-i", "audio=" .. dev}
+            mic = {"-f", "dshow", "-audio_buffer_size", "50", "-i", "audio=" .. dev}
             then_()
         end)
 end
@@ -117,7 +117,7 @@ local function record()
     osd("● recording")
     local a = {}
     for _, v in ipairs(mic) do a[#a + 1] = v end
-    for _, v in ipairs({"-ac", "1", "-ar", "48000", rec}) do a[#a + 1] = v end
+    for _, v in ipairs({"-ac", "1", "-ar", "48000", "-flush_packets", "1", rec}) do a[#a + 1] = v end
     recorder = ffmpeg(a, function()
         recorder = nil
         if not exists(rec) then return osd("Recording failed, check mic") end
