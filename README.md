@@ -12,13 +12,15 @@ mpv and ffmpeg (on PATH; the macOS version also finds Homebrew packages).
 
 Copy the file for your platform into the mpv scripts directory (`~/.config/mpv/scripts/` on Linux and macOS, `%APPDATA%\mpv\scripts\` on Windows) — install exactly one:
 
-- `perfect-sentence-shadowing.lua` — Linux (PulseAudio/PipeWire)
+- `perfect-sentence-shadowing.lua` — GNU/Linux (PulseAudio/PipeWire)
 - `perfect-sentence-shadowing-macos.lua` — macOS (default input device; the
   OS asks for microphone permission once)
 - `perfect-sentence-shadowing-windows.lua` — Windows (first DirectShow
   capture device, detected automatically on the first recording; for a
   specific device, run `ffmpeg -list_devices true -f dshow -i dummy` and set
   the `mic` line to `{"-f", "dshow", "-i", "audio=DEVICE NAME"}`)
+
+For the most problem-free experience we recommend using GNU/Linux.
 
 ### Usage
 
@@ -54,7 +56,7 @@ mpv та ffmpeg (доступні через PATH; версія для macOS т�
 
 Скопіюйте файл для вашої платформи до каталогу скриптів mpv (`~/.config/mpv/scripts/` на Linux і macOS, `%APPDATA%\mpv\scripts\` на Windows) — встановіть рівно один:
 
-- `perfect-sentence-shadowing.lua` — Linux (PulseAudio/PipeWire)
+- `perfect-sentence-shadowing.lua` — GNU/Linux (PulseAudio/PipeWire)
 - `perfect-sentence-shadowing-macos.lua` — macOS (пристрій введення за
   замовчуванням; ОС одноразово запитає дозвіл на використання мікрофона)
 - `perfect-sentence-shadowing-windows.lua` — Windows (перший пристрій
@@ -62,6 +64,8 @@ mpv та ffmpeg (доступні через PATH; версія для macOS т�
   запису; щоб вибрати конкретний пристрій, виконайте
   `ffmpeg -list_devices true -f dshow -i dummy` і вкажіть у рядку `mic`
   значення `{"-f", "dshow", "-i", "audio=НАЗВА ПРИСТРОЮ"}`)
+
+Для найбільш безпроблемного досвіду ми рекомендуємо використовувати GNU/Linux.
 
 ### Використання
 
