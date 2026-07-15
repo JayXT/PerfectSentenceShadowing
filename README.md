@@ -20,7 +20,7 @@ Copy the file for your platform into the mpv scripts directory (`~/.config/mpv/s
   specific device, run `ffmpeg -list_devices true -f dshow -i dummy` and set
   the `mic` line to `{"-f", "dshow", "-i", "audio=DEVICE NAME"}`)
 
-For the most problem-free experience we recommend using GNU/Linux.
+For the most problem-free experience it's recommended to use GNU/Linux.
 
 ### Usage
 
@@ -65,7 +65,7 @@ mpv та ffmpeg (доступні через PATH; версія для macOS т�
   `ffmpeg -list_devices true -f dshow -i dummy` і вкажіть у рядку `mic`
   значення `{"-f", "dshow", "-i", "audio=НАЗВА ПРИСТРОЮ"}`)
 
-Для найбільш безпроблемного досвіду ми рекомендуємо використовувати GNU/Linux.
+Для найбільш безпроблемного досвіду рекомендовано використовувати GNU/Linux.
 
 ### Використання
 
