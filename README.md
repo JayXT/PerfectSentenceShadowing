@@ -43,7 +43,7 @@ and set the `local mic` line in the script:
 local mic = {"-f", "dshow", "-audio_buffer_size", "50", "-i", "audio=YOUR DEVICE NAME"}
 ```
 
-⚠️ For the most problem-free experience it's recommended to use GNU/Linux. macOS and Windows variations are experimental and haven't been tested sufficiently.
+⚠️ For the most problem-free experience it's recommended to use GNU/Linux. macOS and Windows variations have been tested less thorougly.
 
 ### Usage
 
@@ -110,7 +110,7 @@ ffmpeg -list_devices true -f dshow -i dummy
 local mic = {"-f", "dshow", "-audio_buffer_size", "50", "-i", "audio=НАЗВА ВАШОГО ПРИСТРОЮ"}
 ```
 
-⚠️ Для найбільш безпроблемного досвіду рекомендовано використовувати GNU/Linux. Варіації для macOS та Windows є експериментальними та не пройшли достатнього тестування.
+⚠️ Для найбільш безпроблемного досвіду рекомендовано використовувати GNU/Linux. Варіації для macOS та Windows пройшли менш ретельне тестування.
 
 ### Використання
 
