@@ -26,7 +26,7 @@ Copy the file for your platform into the mpv scripts directory (`~/.config/mpv/s
   specific device, run `ffmpeg -list_devices true -f dshow -i dummy` and set
   the `local mic` line to `local mic = {"-f", "dshow", "-i", "audio=DEVICE NAME"}` for your microphone)
 
-For the most problem-free experience it's recommended to use GNU/Linux.
+⚠️ For the most problem-free experience it's recommended to use GNU/Linux. macOS and Windows versions are experimental and haven't been tested sufficiently.
 
 ### Usage
 
