@@ -8,11 +8,11 @@ local function bin(name)
 end
 local FF  = bin("ffmpeg")
 local MPV = bin("mpv")
+local REC = bin("rec")
 local tmp  = os.getenv("TMPDIR") or "/tmp"
 local orig = tmp .. "/shadowing-original.wav"
 local rec  = tmp .. "/shadowing-recording.wav"
 local mix  = tmp .. "/shadowing-mix.wav"
-local mic  = {"-f", "avfoundation", "-i", ":0"}
 local recording = false
 local busy = false
 
@@ -89,19 +89,20 @@ local function record()
     run({"pkill", "-f", "^" .. MPV .. " --load-scripts=no"})
     recording = true
     osd("● recording")
-    local a = {}
-    for _, v in ipairs(mic) do a[#a + 1] = v end
-    for _, v in ipairs({"-ac", "1", "-ar", "48000", rec}) do a[#a + 1] = v end
-    ffmpeg(a, function()
+    run({REC, "-q", rec}, function(_, res)
         recording = false
-        if not exists(rec) then return osd("Recording failed, check mic") end
+        if not exists(rec) then
+            local e = res and (res.stderr and res.stderr:match("[^\n]+")
+                or (res.error_string ~= "" and res.error_string))
+            return osd("Recording failed" .. (e and (": " .. e) or ", check mic"))
+        end
         busy = true
         loudness(rec, function(lr)
             if not lr then busy = false; return osd("Recording is silent, check mic") end
             loudness(orig, function(lo)
                 if not lo then busy = false; osd("■ saved"); return compare() end
-                ffmpeg({"-i", rec, "-af", ("volume=%.1fdB"):format(lo - lr),
-                        "-ar", "48000", rec .. ".n.wav"},
+                ffmpeg({"-i", rec, "-af", ("volume=%.1fdB,alimiter=limit=0.95:level=false"):format(lo - lr),
+                        "-ac", "1", "-ar", "48000", rec .. ".n.wav"},
                     function(_, res)
                         if res and res.status == 0 then
                             os.rename(rec .. ".n.wav", rec)
@@ -126,7 +127,6 @@ end
 local function next()
     mp.set_property("ab-loop-a", "no")
     mp.set_property("ab-loop-b", "no")
-    mp.commandv("ao-reload")
     mp.set_property_bool("pause", false)
 end
 
