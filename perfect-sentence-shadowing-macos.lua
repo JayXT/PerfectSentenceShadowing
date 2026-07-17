@@ -53,7 +53,7 @@ local function compare()
     if not (exists(orig) and exists(rec)) then return osd("Record first") end
     play(rec, function(_, res)
         if res and res.status ~= 0 then return end
-        mp.add_timeout(0.3, function() play(orig) end)
+        mp.add_timeout(0.2, function() play(orig) end)
     end)
 end
 
