@@ -84,7 +84,7 @@ end
 
 local function compare()
     if not (exists(orig) and exists(rec)) then return osd("Record first") end
-    play(rec, function() mp.add_timeout(0.3, function() play(orig) end) end)
+    play(rec, function() mp.add_timeout(0.2, function() play(orig) end) end)
 end
 
 local function overlay()
