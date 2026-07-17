@@ -89,8 +89,9 @@ end
 
 local function overlay()
     if not (exists(orig) and exists(rec)) then return osd("Record first") end
+    stop_players()
     ffmpeg({"-i", orig, "-i", rec, "-filter_complex",
-            "[1:a]silenceremove=start_periods=1:start_threshold=-35dB,volume=3dB[r];" ..
+            "[1:a]volume=3dB[r];" ..
             "[0:a][r]amix=inputs=2:duration=longest", mix},
         function(_, res)
             if res and res.status == 0 then play(mix) else osd("Overlay failed") end
