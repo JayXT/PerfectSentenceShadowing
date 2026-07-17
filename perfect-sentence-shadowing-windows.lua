@@ -2,12 +2,16 @@ local utils = require "mp.utils"
 
 local FF  = "ffmpeg"
 local MPV = mp.command_native({"expand-path", "~~exe_dir/mpv.exe"})
+local RATE = 48000
 local tmp  = os.getenv("TEMP") or "/tmp"
 local orig = tmp .. "/shadowing-original.wav"
 local rec  = tmp .. "/shadowing-recording.wav"
 local mix  = tmp .. "/shadowing-mix.wav"
 local mic  = nil
 local recorder = nil
+local rec_t0 = 0
+local rec_dur = 0
+local finishing = false
 local busy = false
 local players = {}
 
@@ -95,7 +99,7 @@ end
 
 local function extract(a, b)
     ffmpeg({"-ss", tostring(a), "-to", tostring(b), "-i", mp.get_property("path"),
-            "-vn", "-ac", "1", "-ar", "48000", orig},
+            "-vn", "-ac", "1", "-ar", tostring(RATE), orig},
         function(_, res)
             if res and res.status == 0 then
                 os.remove(rec)
@@ -108,26 +112,47 @@ local function extract(a, b)
 end
 
 local function record()
-    if recorder then return mp.abort_async_command(recorder) end
+    if recorder then
+        if finishing then return end
+        finishing = true
+        rec_dur = mp.get_time() - rec_t0
+        local r = recorder
+        local need = rec_dur * RATE * 2 + 100
+        local waited = 0
+        osd("Finishing")
+        local t
+        t = mp.add_periodic_timer(0.1, function()
+            local i = utils.file_info(rec)
+            waited = waited + 0.1
+            if (i and i.size >= need) or waited > 5 then
+                t:kill()
+                mp.abort_async_command(r)
+            end
+        end)
+        return
+    end
     if busy then return end
     if not exists(orig) then return osd("Set A-B loop first") end
     if not mic then return detect_mic(record) end
     mp.set_property_bool("pause", true)
     stop_players()
+    rec_t0 = mp.get_time()
     osd("● recording")
     local a = {}
     for _, v in ipairs(mic) do a[#a + 1] = v end
-    for _, v in ipairs({"-ac", "1", "-ar", "48000", "-flush_packets", "1", rec}) do a[#a + 1] = v end
+    for _, v in ipairs({"-ac", "1", "-ar", tostring(RATE), "-flush_packets", "1", rec}) do a[#a + 1] = v end
     recorder = ffmpeg(a, function()
         recorder = nil
+        finishing = false
         if not exists(rec) then return osd("Recording failed, check mic") end
         busy = true
         loudness(rec, function(lr)
             if not lr then busy = false; return osd("Recording is silent, check mic") end
             loudness(orig, function(lo)
                 if not lo then busy = false; osd("■ saved"); return compare() end
-                ffmpeg({"-i", rec, "-af", ("volume=%.1fdB"):format(lo - lr),
-                        "-ar", "48000", rec .. ".n.wav"},
+                ffmpeg({"-i", rec, "-t", ("%.2f"):format(rec_dur),
+                        "-af", ("volume=%.1fdB"):format(lo - lr),
+                        "-ar", tostring(RATE), rec .. ".n.wav"},
                     function(_, res)
                         if res and res.status == 0 then
                             os.remove(rec)
