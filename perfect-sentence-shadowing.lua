@@ -50,6 +50,7 @@ end
 
 local function overlay()
     if not (exists(orig) and exists(rec)) then return osd("Record first") end
+    run({"pkill", "-f", "^mpv --load-scripts=no"})
     ffmpeg({"-i", orig, "-i", rec, "-filter_complex",
             "[1:a]volume=3dB[r];" ..
             "[0:a][r]amix=inputs=2:duration=longest", mix},
