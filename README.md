@@ -2,7 +2,7 @@
 
 ## EN
 
-An [mpv](https://mpv.io/) script for [perfect sentence shadowing](https://t.me/RefoldUA/184) (Refold Stage 3 → B: Pronunciation Training), aka, [chorusing](https://refold.la/roadmap/library/chorusing) : loop a sentence in content you are watching, record your pronunciation via microphone, and compare your take against the original — including a "flow-verlapping" overlay where pronunciation mismatches produce audible dissonance. The goal is to try to get as close to original pronunciation as currently possible. Everything happens inside mpv with single keypresses.
+An [mpv](https://mpv.io/) script for [perfect sentence shadowing](https://t.me/RefoldUA/184) (Refold Stage 3 → B: Pronunciation Training), and/or [chorusing](https://refold.la/roadmap/library/chorusing) : loop a sentence in content you are watching, record your pronunciation via microphone, and compare your take against the original — including a "flow-verlapping" overlay where pronunciation mismatches produce audible dissonance. The goal is to try to get as close to original pronunciation as currently possible. Everything happens inside mpv with single keypresses.
 
 ### Requirements
 
@@ -69,7 +69,7 @@ Clearing the loop with a third `l` press also deletes the working files, so keep
 
 ## UK
 
-[mpv](https://mpv.io/) скрипт для [ідеального наслідування речень](https://telegra.ph/S3B3-Trenuvannya-vimovi-10-16) (Refold, Стадія 3 → Б: Тренування вимови), також відомого як [хорове повторення](https://refold.la/roadmap/library/chorusing): створіть цикл з реченням у контенті, який дивитесь, запишіть власну вимову на мікрофон і порівнюйте її з оригіналом — включно з накладанням у стилі «flow-verlapping», де розбіжності у вимові створюють відчутний дисонанс. Мета — спробувати максимально наблизитися до оригінальної вимови. Усе відбувається всередині mpv одиничними натисканнями клавіш.
+[mpv](https://mpv.io/) скрипт для [ідеального наслідування речень](https://telegra.ph/S3B3-Trenuvannya-vimovi-10-16) (Refold, Стадія 3 → Б: Тренування вимови) і/або [хорового повторення](https://refold.la/roadmap/library/chorusing): створіть цикл з реченням у контенті, який дивитесь, запишіть власну вимову на мікрофон і порівнюйте її з оригіналом — включно з накладанням у стилі «flow-verlapping», де розбіжності у вимові створюють відчутний дисонанс. Мета — спробувати максимально наблизитися до оригінальної вимови. Усе відбувається всередині mpv одиничними натисканнями клавіш.
 
 ### Вимоги
 
