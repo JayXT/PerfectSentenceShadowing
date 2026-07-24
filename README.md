@@ -66,6 +66,8 @@ Clearing the loop with a third `l` press also deletes the working files, so keep
 ### Notes
 
 - Working files live in the system temporary directory and are deleted when the loop is cleared.
+- If the relative volume of your voice in an overlay/mix sounds too silent or too loud against the original, it's possible to adjust it by changing 3dB from `[1:a]volume=3dB[r];` in the `overlay()` function to a different value. Increasing the value will raise the volume, decreasing will lower it.
+- Changes to script will take effect new mpv instances, i.e. application restart might be needed.
 
 ## UK
 
@@ -133,3 +135,5 @@ local mic = {"-f", "dshow", "-audio_buffer_size", "50", "-i", "audio=НАЗВА 
 ### Примітки
 
 - Робочі файли зберігаються в системному тимчасовому каталозі і видаляються після скидання циклу.
+- Якщо відносна гучність вашого голосу в накладенні/міксі звучить занадто тихо або занадто голосно порівняно з оригіналом, її можна відрегулювати, змінивши значення 3dB з `[1:a]volume=3dB[r];` у функції `overlay()` на інше. Збільшення значення додасть гучності, зменшення її знизить.
+- Зміни у скрипті набудуть чинності лише для нових екземплярів mpv, тобто може знадобитися перезапуск програми.
