@@ -67,7 +67,7 @@ Clearing the loop with a third `l` press also deletes the working files, so keep
 
 - Working files live in the system temporary directory and are deleted when the loop is cleared.
 - If the relative volume of your voice in an overlay/mix sounds too silent or too loud against the original, it's possible to adjust it by changing 3dB from `[1:a]volume=3dB[r];` in the `overlay()` function to a different value. Increasing the value will raise the volume, decreasing will lower it.
-- Changes to script will take effect new mpv instances, i.e. application restart might be needed.
+- Changes to script will take effect for new mpv instances, i.e. application restart might be needed.
 
 ## UK
 
